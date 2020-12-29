@@ -15,5 +15,6 @@ Gem::Specification.new do |spec|
   spec.description = "Description of DynamicLinks."
   spec.license     = "MIT"
 
+  spec.add_dependency "hashids", "~>1.0"
   spec.add_development_dependency "rails", ">= 5.0"
 end
