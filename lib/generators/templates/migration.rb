@@ -5,6 +5,7 @@ class CreateDynamicLinksTable < ActiveRecord::Migration[6.0]
         t.string :link_key, null: false
         t.string :hostname, null: false
         t.text   :link_data
+        t.boolean :active, default: true
   
         # valid until date for expirable urls
         t.datetime :expires_at

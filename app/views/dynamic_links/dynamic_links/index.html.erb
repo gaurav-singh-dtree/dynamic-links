@@ -1,0 +1,18 @@
+<%= javascript_include_tag 'actions' %>
+<table>
+  <th>Link</th>
+  <th>Action</th>
+  <% @links.each do |link| %>
+    <tr>
+      <td><%= link.generate_link %></td>
+      <td>
+        <button 
+          class="actions"
+          data-link-key= <%=link.link_key%>
+          data-link-status= <%= !link.active%>
+          >
+          <%= link.active ? 'Disable' : 'Activate' %>
+        </button>
+    </tr>
+  <% end %>
+</table>
