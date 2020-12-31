@@ -1,18 +1,30 @@
 <%= javascript_include_tag 'actions' %>
-<table>
-  <th>Link</th>
-  <th>Action</th>
-  <% @links.each do |link| %>
+<%= stylesheet_link_tag 'actions' %>
+<h1 class="dynamic-link">
+Dynamic Links
+</h1>
+<table class='links-table'>
+  <thead>
     <tr>
-      <td><%= link.generate_link %></td>
-      <td>
-        <button 
-          class="actions"
-          data-link-key= <%=link.link_key%>
-          data-link-status= <%= !link.active%>
-          >
-          <%= link.active ? 'Disable' : 'Activate' %>
-        </button>
+      <th>Id</th>
+      <th>Link</th>
+      <th>Action</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @links.each do |link| %>
+      <tr>
+        <td class="row-data"><%= link.id %></td>
+        <td class="row-data"><%= link.generate_link %></td>
+        <td class="row-data">
+          <button 
+            class="actions"
+            data-link-key= <%=link.link_key%>
+            data-link-status= <%= !link.active%>
+            >
+            <%= link.active ? 'Disable' : 'Activate' %>
+          </button>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

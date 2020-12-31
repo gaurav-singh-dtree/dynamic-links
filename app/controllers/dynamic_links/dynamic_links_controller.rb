@@ -18,7 +18,6 @@ class DynamicLinks::DynamicLinksController < ApplicationController
   def update_status
     link = DynamicLinks::DynamicLink.find_by(link_key: params[:id])
     link.active = params[:status]
-    byebug
     link.save!
     render json:{msg: "done"}, status: :ok
   end
