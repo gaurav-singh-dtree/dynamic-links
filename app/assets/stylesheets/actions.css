@@ -4,13 +4,23 @@
   font-size: 0.9em;
   font-family: sans-serif;
   width: 90%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 20px;
   margin-left: 50px;
+}
+
+.actions-activate {
+  border-radius: 10px;
+  background-color: #04374629;
+}
+
+.actions-disable {
+  border-radius: 10px;
+  background-color: #e14c0c29;
 }
 
 .dynamic-link {
   text-align: center;
-  background-color: #126a8a;
+  background-color: #3d8eac;
 }
 
 table { border-collapse: collapse; }
@@ -24,7 +34,6 @@ td {
 }
 
 th {
-  color: #000900;
   background-color: #24b324;
   height: 50px;
 }

@@ -1,10 +1,13 @@
 var Actions = {
-  linkActionClass: ".actions",
+  linkActionClasses: [".actions-disable",".actions-activate"],
+  
   bindLinkActionEvent: function() {
-    document.querySelectorAll(this.linkActionClass).forEach(element => {
-      element.addEventListener('click', (event) => {
-        event.preventDefault();
-        this.handleLinkEvent(element);
+    this.linkActionClasses.forEach(linkActionClass => {
+      document.querySelectorAll(linkActionClass).forEach(element => {
+        element.addEventListener('click', (event) => {
+          event.preventDefault();
+          this.handleLinkEvent(element);
+        })
       })
     })
   },
@@ -29,17 +32,23 @@ var Actions = {
 
   handleSuccessEvent: function(data, element) {
     element.dataset.linkStatus = this.getButtonStatusAfterClick(element);
+    element.className = this.getButtonClassName(element);
     element.innerText = this.getButtonTextAfterClick(element);
-    console.log(data)
   },
 
   handleErrorEvent: function(error, element) {
     console.log(error);
   },
 
+  /* TODO - Refacor 3 functions */
   getButtonTextAfterClick: function(element) {
     var text = (element.innerText === 'Activate' ? 'Disable' : 'Activate');
     return text;
+  },
+
+  getButtonClassName: function(element) {
+    var className = (element.innerText === 'Activate' ? "actions-disable" : "actions-activate");
+    return className;
   },
 
   getButtonStatusAfterClick: function(element) {

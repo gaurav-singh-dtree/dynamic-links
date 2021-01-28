@@ -9,10 +9,12 @@ class DynamicLinks::DynamicLink < ApplicationRecord
 
   scope :not_expired , -> { where("expires_at IS NULL OR expires_at > ?", Time.now)}
 
-  def self.generate(hostname:, custom_name: nil, expires_at: nil, options: nil)
+  def self.generate(hostname:, custom_name: nil, expires_at: nil, options: nil, about: nil)
+    # TODO - refactor
     link = find_or_create_by!(hostname: hostname, link_data: options) do |dynamic_link|
       dynamic_link.expires_at = expires_at
       dynamic_link.link_key = generate_key(custom_name)
+      dynamic_link.about = about
     end
     link.generate_link
   end
@@ -22,6 +24,7 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   end
 
   def build_redirect
+    # TODO - refactor
     if link_data[:link]
       "#{hostname}#{link_data[:link]}"
     elsif link_data[:action]
@@ -33,6 +36,7 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   end
 
   def generate_link
+    # TODO - refactor
     "#{self.hostname}/dl/#{self.link_key}"
   end
 
