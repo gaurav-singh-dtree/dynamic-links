@@ -42,7 +42,7 @@ class DynamicLinks::DynamicLink < ApplicationRecord
 
   def generate_link
     # TODO - refactor
-    "#{self.hostname}/#{DynamicLinks.configuration.subdomain}/#{self.link_key}"
+    "#{self.hostname}/#{DynamicLinks.configuration.root}/#{self.link_key}"
   end
 
   def valid_link?
@@ -131,7 +131,11 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   end
 
   def valid_expiry_date?
-    expires_at > Time.now
+    if expires_at
+      expires_at > Time.now
+    else
+      true
+    end
   end
 
   def build_error
