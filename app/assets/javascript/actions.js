@@ -14,12 +14,21 @@ var Actions = {
 
   handleLinkEvent: function(element) {
     let { linkKey, linkStatus } = element.dataset;
-    var formData = new FormData();
-    formData.append('id', linkKey);
-    formData.append('status', linkStatus);
+    const csrf_token = document.querySelector("meta[name=csrf-token]").content;
+    const csrf_param = document.querySelector("meta[name=csrf-param]").content;
+    const data = {
+      id: linkKey,
+      status: linkStatus,
+      [csrf_param]: csrf_token
+    }
+
     fetch('links/update_status', {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type':'application/json'
+      },
       method: 'PUT',
-      body: formData,
+      body: JSON.stringify(data),
     })
     .then(response => response.json())
     .then(data => {
@@ -34,6 +43,7 @@ var Actions = {
     element.dataset.linkStatus = this.getButtonStatusAfterClick(element);
     element.className = this.getButtonClassName(element);
     element.innerText = this.getButtonTextAfterClick(element);
+    element.parentNode.parentNode.className = this.getRowClassName(element);
   },
 
   handleErrorEvent: function(error, element) {
@@ -48,6 +58,11 @@ var Actions = {
 
   getButtonClassName: function(element) {
     var className = (element.innerText === 'Activate' ? "actions-disable" : "actions-activate");
+    return className;
+  },
+
+  getRowClassName: function(element) {
+    var className = (element.innerText === 'Activate' ? "row-invalid" : "row");
     return className;
   },
 

@@ -15,26 +15,7 @@ Dynamic Links
   </thead>
   <tbody>
     <% @links.each do |link| %>
-      <% link_text = link.active? ? 'Disable' : 'Activate' %>
-      <% button_class = link.active? ? "actions-disable" : "actions-activate" %>
-      <tr>
-        <td class="row-data"><%= link.id %></td>
-        <td class="row-data">
-          <a href=<%= link.generate_link %> target="_blank">
-            <%= link.generate_link %>
-          </a>
-        </td>
-        <td class="row-data"><%= link.about %></td>
-        <td class="row-data"><%= link.expires_at %></td>
-        <td class="row-data">
-          <button 
-          class=<%= button_class %>
-          data-link-key= <%=link.link_key%>
-          data-link-status= <%= !link.active%>
-          >
-            <%= link_text %>
-          </button>
-      </tr>
+      <%= create_row(link) %>
     <% end %>
   </tbody>
 </table>

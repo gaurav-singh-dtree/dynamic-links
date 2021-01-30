@@ -1,5 +1,8 @@
-.links-table {
+table {
   border-collapse: collapse;
+}
+
+.links-table {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
@@ -8,14 +11,18 @@
   margin-left: 50px;
 }
 
+.invalid {
+  background-color: #e4650429;
+}
+
 .actions-activate {
   border-radius: 10px;
-  background-color: #04374629;
+  background-color: #a5e6a5;
 }
 
 .actions-disable {
   border-radius: 10px;
-  background-color: #e14c0c29;
+  background-color: #fd8585;
 }
 
 .dynamic-link {
@@ -23,19 +30,17 @@
   background-color: #3d8eac;
 }
 
-table { border-collapse: collapse; }
-tr:nth-child(even) { background-color: #f2f2f2; }
-
 td {
   height: 50px;
-  padding-top: .5em;
-  padding-bottom: .5em;
-  border: #000900 1px;
+  border-top: 2px solid #f9f6f6;
+  padding: 0.5rem;
 }
 
 th {
   background-color: #24b324;
   height: 50px;
+  border-top: 1px solid rgb(24, 23, 23);
+  padding: 0.5rem;
 }
 
 .row-data {
