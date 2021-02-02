@@ -36,6 +36,16 @@ There are 3 steps required for using this gem in rails application -
     config.hash_salt = SecureRandom.hex
   end
   ```
+- ## Migration  
+    First we need to generate the migration file which contains the details of the dynamic links. 
+    ```
+      bundle exec rails generate dynamic_links
+    ```
+    This will generate a migration file in the `app/db/migrate` folder.  
+    Now run the migration to generate the table in the database  
+    ```
+    bundle exec rails db:migration
+    ```
 
 
 ## Configuration
