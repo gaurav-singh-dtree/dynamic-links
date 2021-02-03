@@ -6,7 +6,7 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   serialize :link_data
   validates_presence_of :link_key, :hostname
   validates :link_key, uniqueness: true
-  validate :valid_link_attributes
+  validates_with DynamicLinks::DynamicLinkValidator
 
 
   scope :not_expired , -> { where("expires_at IS NULL OR expires_at > ?", Time.now)}
@@ -24,7 +24,7 @@ class DynamicLinks::DynamicLink < ApplicationRecord
     if link.valid?
       link.generate_link
     else
-      build_error
+      link.build_error
     end
   end
 
@@ -41,7 +41,6 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   end
 
   def generate_link
-    # TODO - refactor
     "#{self.hostname}/#{DynamicLinks.configuration.root}/#{self.link_key}"
   end
 
@@ -50,7 +49,15 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   end
 
   def expired?
-    expires_at < Time.now
+    expires_at < Time.now if expires_at
+  end
+
+  def build_error
+    errors = []
+    self.errors.each do |attribute, error|
+      errors << error
+    end
+    { error: errors.join(',') }
   end
 
   private
@@ -103,46 +110,5 @@ class DynamicLinks::DynamicLink < ApplicationRecord
     )
     link_id = hashid.encode((self.last&.id || 0) + 1)
     custom_prefix.present? ? "#{custom_prefix}-#{link_id}" : link_id
-  end
-
-  def valid_link_attributes
-    if !valid_host?
-      self.errors.add(:hostname, "Invalid Host")
-    end
-    if !valid_expiry_date?
-      self.errors.add(:expires_at, "Invalid Expiry Date")
-    end
-    if !valid_link_key?
-      self.errors.add(:link_key, "Invalid Custom Name")
-    end
-  end
-
-  def valid_host?
-    uri = URI.parse(hostname)
-    uri.is_a?(URI::HTTP) && !uri.host.nil?
-  rescue URI::InvalidURIError
-    false
-  end
-
-  def valid_link_key?
-    DynamicLinks.configuration.forbidden_keywords.reduce(true) do |val, keyword|
-      val = (val && !link_key.include?(keyword))
-    end
-  end
-
-  def valid_expiry_date?
-    if expires_at
-      expires_at > Time.now
-    else
-      true
-    end
-  end
-
-  def build_error
-    errors = []
-    link.errors.each do |attribute, error|
-      errors << error
-    end
-    { error: errors.join(',') }
   end
 end

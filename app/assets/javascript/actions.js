@@ -50,25 +50,28 @@ var Actions = {
     console.log(error);
   },
 
-  /* TODO - Refacor 3 functions */
   getButtonTextAfterClick: function(element) {
-    var text = (element.innerText === 'Activate' ? 'Disable' : 'Activate');
+    var text = (isActiveElement(element) ? 'Disable' : 'Activate');
     return text;
   },
 
   getButtonClassName: function(element) {
-    var className = (element.innerText === 'Activate' ? "actions-disable" : "actions-activate");
+    var className = (isActiveElement(element) ? "actions-disable" : "actions-activate");
     return className;
   },
 
   getRowClassName: function(element) {
-    var className = (element.innerText === 'Activate' ? "row-invalid" : "row");
+    var className = (isActiveElement(element) ? "row-invalid" : "row");
     return className;
   },
 
   getButtonStatusAfterClick: function(element) {
     var status = (element.dataset.linkStatus === 'true' ? false : true);
     return status;
+  },
+
+  isActiveElement: function(element) {
+    return element.innerText === 'Activate';
   }
 }
 
