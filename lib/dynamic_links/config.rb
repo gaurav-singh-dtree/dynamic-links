@@ -4,7 +4,7 @@ module DynamicLinks
 
     def initialize
       # TODO - get forbidden keywords from yml file
-      @forbidden_keywords = %w[fuck muck suck]
+      @forbidden_keywords = %w[fuck muck suck dick cock]
       @root = "dl"
       @default_expiry = Date.tomorrow
       @sublink_length = 2
