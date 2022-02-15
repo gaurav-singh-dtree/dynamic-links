@@ -3,7 +3,7 @@ Motivation for this gem comes from the requirement that sometimes rails applicat
 This gem provides following features - 
  - Url shortening
  - Custom Urls
- - Append tracking params to the Dynnamic Urls(This gem will generate the custom url for the campaigns but when the url will be redirected, it will be appended with the utm params which will help in tracking the url)
+ - Append tracking params to the Dynamic Urls(This gem will generate the custom url for the campaigns but when the url will be redirected, it will be appended with the utm params which will help in tracking the url)
  - Expire the dynamic url
 
 ## Installation
