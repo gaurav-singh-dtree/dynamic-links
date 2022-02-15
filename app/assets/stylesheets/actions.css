@@ -1,3 +1,14 @@
+/*Colors*/
+:root {
+  --purplish: #e4650429;
+  --greenish: #a5e6a5;
+  --redish: #fd8585;
+  --blueish: #3d8eac;
+  --whitish: #f9f6f6;
+  --greenish: #24b324;
+  --blackish: rgb(24, 23, 23);
+}
+
 table {
   border-collapse: collapse;
 }
@@ -12,34 +23,34 @@ table {
 }
 
 .invalid {
-  background-color: #e4650429;
+  background-color: var(--purplish);
 }
 
 .actions-activate {
   border-radius: 10px;
-  background-color: #a5e6a5;
+  background-color: var(--greenish);
 }
 
 .actions-disable {
   border-radius: 10px;
-  background-color: #fd8585;
+  background-color:  var(--redish);
 }
 
 .dynamic-link {
   text-align: center;
-  background-color: #3d8eac;
+  background-color: var(--blueish);
 }
 
 td {
   height: 50px;
-  border-top: 2px solid #f9f6f6;
+  border-top: 2px solid var(--whitish);
   padding: 0.5rem;
 }
 
 th {
-  background-color: #24b324;
+  background-color:  var(--greenish);
   height: 50px;
-  border-top: 1px solid rgb(24, 23, 23);
+  border-top: 1px solid var(--blackish);
   padding: 0.5rem;
 }
 

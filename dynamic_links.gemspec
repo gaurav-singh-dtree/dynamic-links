@@ -9,10 +9,10 @@ Gem::Specification.new do |spec|
   spec.files       = `git ls-files`.split("\n")
   spec.version     = DynamicLinks::VERSION
   spec.authors     = ["Gaurav Singh"]
-  spec.email       = ["gaurav.singh@coupa.com"]
-  spec.homepage    = "http://www.todo.com"
-  spec.summary     = "Summary of DynamicLinks."
-  spec.description = "Description of DynamicLinks."
+  spec.email       = ["gaurav@dtreelabs.com"]
+  spec.homepage    = "http://www.dtreelabs.com"
+  spec.summary     = "Motivation for this gem comes from the requirement that sometimes applications needs to customize the links which they send for the campaigns or share on the social networking platforms."
+  spec.description = "Motivation for this gem comes from the requirement that sometimes applications needs to customize the links which they send for the campaigns or share on the social networking platforms."
   spec.license     = "MIT"
 
   spec.add_dependency "hashids", "~>1.0"
