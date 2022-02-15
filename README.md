@@ -1,5 +1,5 @@
 # Dynamic Links
-Motivation for this gem comes from the requirement that sometimes rails applications needs to customize the links which they send for the campaigns or share on the social networking platforms.
+Motivation for this gem comes from the requirement that sometimes applications needs to customize the links which they send for the campaigns or share on the social networking platforms.
 This gem provides following features - 
  - Url shortening
  - Custom Urls
