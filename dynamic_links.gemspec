@@ -19,4 +19,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rails", ">= 5.0"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "sqlite3", "~> 1.4"
 end

@@ -13,12 +13,20 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require "active_record/railtie"
+require "action_controller/railtie"
 require 'rspec/rails'
 
 PROJECT_ROOT_PATH = __dir__
+
 Dir[File.expand_path("#{PROJECT_ROOT_PATH}/../lib/dynamic_links/*.rb", __FILE__)].each do |file|
   require file
 end
+
+ActiveRecord::Base.establish_connection(
+  "adapter" => "sqlite3",
+  "database"  => "dbfile"
+)
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
