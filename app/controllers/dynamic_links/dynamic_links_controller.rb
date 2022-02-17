@@ -15,13 +15,11 @@ class DynamicLinks::DynamicLinksController < ApplicationController
   end
 
   def update_status
-    if request.xhr?
-      link = DynamicLinks::DynamicLink.find_by(link_key: params[:id])
-      link.active = params[:status]
-      link.save!
-      render json:{msg: "done"}, status: :ok
-    else
-      render json:{error: "Not a valid request"}, status: :bad_request
-    end
+    return render json:{error: "Not a valid request"}, status: :bad_request unless request.xhr?
+
+    link = DynamicLinks::DynamicLink.find_by(link_key: params[:id])
+    link.active = params[:status]
+    link.save!
+    render json:{msg: "done"}, status: :ok
   end
 end

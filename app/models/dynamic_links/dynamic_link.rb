@@ -21,11 +21,10 @@ class DynamicLinks::DynamicLink < ApplicationRecord
       about: about,
       force_new: force_new
     )
-    if link.valid?
-      link.generate_link
-    else
-      link.build_error
-    end
+    
+    return link.generate_link if link.valid?
+
+    link.build_error
   end
 
   def self.fetch_link(key)
@@ -41,7 +40,7 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   end
 
   def generate_link
-    "#{self.hostname}/#{DynamicLinks.configuration.root}/#{self.link_key}"
+    "#{hostname}/#{DynamicLinks.configuration.root}/#{link_key}"
   end
 
   def valid_link?
@@ -93,14 +92,16 @@ class DynamicLinks::DynamicLink < ApplicationRecord
   def build_query_params_from_utm
     utm_query_params = []
     final_query_params = nil
-    utm_keys = link_data.keys.select{ |v| v.to_s.start_with?('utm') }
+    
     utm_keys.each do |key|
       utm_query_params << "#{key}=#{link_data[key]}"
     end
-    final_query_params = utm_query_params.join("&") if utm_query_params.present?
-    if final_query_params
-      return "?#{final_query_params}"
-    end
+
+    "?#{utm_query_params.join("&")}" if utm_query_params.present?
+  end
+
+  def utm_keys
+    link_data.keys.select{ |v| v.to_s.start_with?('utm') }
   end
 
   def self.generate_key(custom_prefix)
