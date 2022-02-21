@@ -17,6 +17,6 @@ class DynamicLinksGenerator < Rails::Generators::Base
   end
 
   def create_migration_file
-    migration_template 'dynamic_links_migration.rb', 'db/migrate/create_dynamic_links_table.rb'
+    migration_template 'trackers_migration.rb', 'db/migrate/create_trackers_table.rb'
   end
 end
