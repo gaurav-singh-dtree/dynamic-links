@@ -3,6 +3,7 @@ class DynamicLinks::DynamicLinksController < ApplicationController
 
   def send_to
     if params[:id]
+      DynamicLink::RequestTrackerService.call(request) # Track the source of the request
       dynamic_link = DynamicLinks::DynamicLink.fetch_link(params[:id])
       url = dynamic_link&.build_redirect_link
       redirect_to(url) and return if url
