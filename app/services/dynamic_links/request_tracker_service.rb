@@ -13,11 +13,12 @@ module DynamicLinks
     private
 
     def process
-      tracker = DynamicLinks::Tracker.new
-      tracker.remote_ip = request.remote_ip
-      tracker.ip = request.ip
-      tracker.user_agent = request.headers['User-Agent']
-      tracker.http_origin = request.headers['HTTP_ORIGIN']
+      tracker = DynamicLinks::Tracker.new(
+        remote_ip: request.remote_ip,
+        ip: request.ip,
+        user_agent: request.headers['User-Agent'],
+        http_origin: request.headers['HTTP_ORIGIN']
+      )
       if tracker.save
         return true
       else
